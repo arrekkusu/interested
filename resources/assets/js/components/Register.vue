@@ -56,7 +56,8 @@ export default {
                 password: '',
                 error: false,
                 errors: {},
-                success: false
+                success: false,
+                show: false,
             };
         },
         methods: {
