@@ -17,4 +17,8 @@ class Interest extends Model
     {
         return $this->hasMany(Conversation::class);
     }
+    public function category()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

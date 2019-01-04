@@ -17,7 +17,7 @@ class CreateInterestsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description');
-            $table->integer('members')->default('1');
+            $table->integer('members')->default('0')->nullable();
             $table->string('interest_url')->default('/img/interests/default.png')->nulllable();
             $table->timestamps();
         });

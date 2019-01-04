@@ -57,9 +57,20 @@ class ConversationController extends Controller
      * @param  \App\Conversation  $conversation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function isSubscribed($pageTitle, $userInt)
     {
-        $conversation = Conversation::find($id)->load('message');
+       foreach ($userInt as $userI) {
+           if ($userI['title'] = $pageTitle) {
+               $subscribed = true;
+           }
+       }
+
+       return response()->json(["subscribed" => $subscribed]);
+    }
+
+    public function subscribed($id)
+    {
+        $conversation = Conversation::find($id)->load('message.user', 'interest');
 
         return response()->json(["conversation" => $conversation]);
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessagesTable extends Migration
+class CategoryInterest extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedinteger('conversation_id');
-            $table->unsignedinteger('user_id');
-            $table->string('body');
-            $table->timestamps();
+        Schema::create('Category_Interest', function (Blueprint $table) {
+            $table->unsignedinteger('category_id');
+            $table->unsignedinteger('interest_id');
+            $table->primary(['category_id', 'interest_id']);
         });
     }
 
@@ -29,6 +27,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        //
     }
 }

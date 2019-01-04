@@ -53,6 +53,8 @@ class MessageController extends Controller
 
          ]);
 
+         Conversation::find($request->conv_id)->increment('participants');
+
     }
 
     /**
@@ -61,9 +63,11 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+        $messages = Message::where('conv_id', '=', $id)->load('user');
+
+        return response()->json(["messages" => $messages]);
     }
 
     /**

@@ -9,7 +9,7 @@
         <v-toolbar-title>{{interest.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            {{int}}
+            {{interest.category}}
         </v-toolbar-items>
     </v-toolbar>
         <v-img 
@@ -63,7 +63,7 @@
                 <v-text-field
                 v-model="conv.title"
                 placeholder="Start a new conversation?"
-                @keyup.enter="newConv()"
+                @keyup.enter="isSubscribed()"
                  />
                  <v-btn @click="newConv()" dark>Create</v-btn>
                 </v-flex>
@@ -95,6 +95,7 @@ export default {
                 id: '',
                 title: '',
                 conversation: [],
+                category: [],
             },
             createNew: false,
             loading: false,
@@ -105,9 +106,10 @@ export default {
             subscribed: false,
             int: '',
             intitle: '',
+            category: [],
         };
     },
-    created() {
+    mounted() {
         // this.loading = true;
         this.axios.get(`interest/profile/${this.$route.params.id}`)
         .then((response) => {
@@ -116,10 +118,14 @@ export default {
         this.axios.get('auth/user')
         .then((response) => {
             this.user = response.data.data;
+            this.subscribed = this.user.interest.some(item => item.title.toLowerCase() === this.interest.title.toLowerCase());
             console.log(this.user);
-        this.intitle = this.interest.title;
         });
-        this.int = this.user.interest.includes(item => item.title.toLowerCase() === this.interest.title.toLowerCase());
+        // for (i = 0; 1 < user.interest.length; i++) {
+        //     if (this.user.interest.title = this.interest.title) {
+        //         this.subscribed = true;
+        //     }
+        // }
         // if ( this.int == true) {
         //     this.subscribed = true;
         // } else {
@@ -142,6 +148,7 @@ export default {
             })
         },
         subscribe() {
+            this.interest.category = this.category;
             this.axios.post(`subscribe/${this.$route.params.id}/${this.user.id}/add`)
             .then((response) => {
                 this.subscribed = response.data.subscribed;

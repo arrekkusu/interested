@@ -10,6 +10,29 @@
     </v-toolbar>
             <v-container grid-list-xs>
                <v-layout row wrap>
+                    <v-card class="title">
+                        <v-layout column>
+                            Create
+                            <v-text-field 
+                            placeholder="Name"
+                            v-model="newInterest.title"
+                                />
+                                <v-textarea 
+                            placeholder="What's it about?"
+                            v-model="newInterest.description"
+                                />
+                            <v-autocomplete
+                            v-model="newInterest.category_id"
+                            :items="categories"
+                            item-text="title"
+                            item-value="id"
+                            placeholder="Categories"
+                            multiple 
+                                />
+                                <v-btn dark @click="createNew()">Create</v-btn>
+                                <div class="success--text" v-show="success == true">Success!</div>
+                        </v-layout>
+                    </v-card>
                       <v-flex xs6 d-flex v-for="(interest, i) in interests" :key="i">
                             <v-card class="ma-2" height="140" :to="'interest/profile/' + interest.id">
                                 <v-img :src="interest.interest_url" alt="banner" width="100%" height="80" />
@@ -29,13 +52,36 @@ export default {
     data() {
         return {
             interests: [],
+            newInterest: {
+                title: '',
+                description: '',
+                category_id: [],
+            },
+            categories: [],
+            success: false,
         };
     },
     created() {
         this.axios.get('/interests')
         .then((response) => {
             this.interests = response.data.interests;
+        });
+         this.axios.get('/categories')
+        .then((response) => {
+            this.categories = response.data.categories;
         })
+    },
+    methods: {
+         createNew() {
+             this.axios.post('/interest/store', this.newInterest)
+             .then((response) => {
+                this.success = response.data.success;
+                this.axios.get('/interests')
+                    .then((response) => {
+                        this.interests = response.data.interests;
+             })
+        })
+         }
     }
 }
 </script>

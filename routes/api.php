@@ -14,9 +14,14 @@ use Illuminate\Http\Request;
 */
 
 Route::post('conv/store', 'ConversationController@store');
+Route::post('interest/store', 'InterestController@store');
 Route::post('message/store', 'MessageController@store');
+Route::post('message/{id}/conv', 'MessageController@show');
 Route::get('conv/{id}', 'ConversationController@show');
+Route::get('get/users', 'AutoCompleteController@getUsers');
+Route::get('subscribed/{pageTitle}/{UserInt}', 'ConversationController@isSubscribed');
 Route::get('categories', 'CategoryController@show');
+Route::get('{id}/recommended', 'CategoryController@recommended');
 Route::get('interests', 'InterestController@getAll');
 Route::post('subscribe/{id}/{int}/add', 'InterestController@subscribe');
 Route::post('subscribe/{id}/{int}/remove', 'InterestController@unsubscribe');

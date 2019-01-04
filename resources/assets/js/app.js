@@ -5,6 +5,7 @@ import colors from 'vuetify/es5/util/colors';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import Vue2Filters from 'vue2-filters';
 import App from './App.vue';
 import Dashboard from './components/Dashboard.vue';
 import Home from './components/Home.vue';
@@ -14,8 +15,10 @@ import UserProfile from './components/UserProfile.vue';
 import InterestsHome from './components/InterestsHome.vue';
 import InterestProfile from './components/InterestProfile.vue';
 import Conversation from './components/Conversation.vue';
+import Messages from './components/Messages.vue';
 
 Vue.use(VueRouter);
+Vue.use(Vue2Filters);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 Vue.use(Vuetify, {
@@ -29,7 +32,10 @@ const router = new VueRouter({
     routes: [{
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: {
+            auth: false
+        }
     },{
         path: '/register',
         name: 'register',
@@ -70,6 +76,13 @@ const router = new VueRouter({
         path: '/conv/:id',
         name: 'Conversation',
         component: Conversation,
+        meta: {
+            auth: true
+        }
+    },{
+        path: '/user/messages',
+        name: 'Messages',
+        component: Messages,
         meta: {
             auth: true
         }

@@ -6,14 +6,13 @@
                 <v-icon>chevron_left</v-icon>
             </v-layout>
             </v-btn>
-        <v-toolbar-title>{{conv.title}}</v-toolbar-title>
+        <v-toolbar-title>{{conv.interest.title}} - {{conv.title}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
         </v-toolbar-items>
     </v-toolbar>
-   
-        <v-card v-for="(mess, m) in conv.message" :key="m" class="mt-1 pa-3">
-          <v-layout row wrap>
+        <v-card v-for="(mess, m) in conv.message" :key="m" class="mt-1 pa-3" :href="'/#/UserProfile/' + mess.user.id">
+          <v-layout row wrap justify-start>
                <v-layout row wrap justify-start align-center>
             <v-avatar
                 size="20"
@@ -21,7 +20,10 @@
                 class="mx-3"
             >
             </v-avatar>
+            <v-layout column justify-start>
+            <strong>- {{mess.user.name}}</strong>
             {{mess.body}}      
+            </v-layout>
             </v-layout>
             <v-layout row wrap justify-end align-center>
                 {{mess.updated_at}}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Interest;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -46,7 +48,26 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        Category::select('id', 'title')->orderBy('title')->get();
+        $categories = Category::select('id', 'title')->orderBy('title')->get();
+
+        return response()->json(["categories" => $categories]);
+    }
+
+    public function recommended($id)
+    {
+        $user = User::find($id)->load('category');
+
+        $categories = $user->category;
+
+        foreach ($categories as $category) {
+
+            // $cat = $category['id'];
+        $recommended = Interest::whereIn('id', $category)->get();
+
+        }
+
+
+        return response()->json(["recommended" => $recommended]);
     }
 
     /**

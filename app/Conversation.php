@@ -12,7 +12,7 @@ class Conversation extends Model
     ];
     public function interest()
     {
-       return $this->belongsToOne(Interest::class);
+       return $this->hasOne(Interest::class, 'id', 'interest_id');
     }
     public function message()
     {
