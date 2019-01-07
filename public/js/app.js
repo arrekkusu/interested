@@ -7343,13 +7343,13 @@ var render = function() {
                             attrs: {
                               label: "Password",
                               type: _vm.show1 ? "text" : "password",
-                              "append-icon": _vm.show1
+                              "append-icon": _vm.show
                                 ? "visibility_off"
                                 : "visibility"
                             },
                             on: {
                               "click:append": function($event) {
-                                _vm.show1 = !_vm.show1
+                                _vm.show = !_vm.show
                               }
                             },
                             model: {

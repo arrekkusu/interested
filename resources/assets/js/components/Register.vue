@@ -34,8 +34,8 @@
                     v-model="password"
                     label="Password"
                     :type="show1 ? 'text' : 'password'"
-                    :append-icon="show1 ? 'visibility_off' : 'visibility'"
-                    @click:append="show1 = !show1"
+                    :append-icon="show ? 'visibility_off' : 'visibility'"
+                    @click:append="show = !show"
                 ></v-text-field>
                   <v-btn width="100%" @click="register()" color="primary">Submit</v-btn>
                        </v-flex>
