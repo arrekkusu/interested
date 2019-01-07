@@ -3804,7 +3804,8 @@ __webpack_require__.r(__webpack_exports__);
       password: '',
       error: false,
       errors: {},
-      success: false
+      success: false,
+      show: false
     };
   },
   methods: {
@@ -4123,7 +4124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -45213,7 +45214,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InterestsHome_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/InterestsHome.vue */ "./resources/assets/js/components/InterestsHome.vue");
 /* harmony import */ var _components_InterestProfile_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/InterestProfile.vue */ "./resources/assets/js/components/InterestProfile.vue");
 /* harmony import */ var _components_Conversation_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Conversation.vue */ "./resources/assets/js/components/Conversation.vue");
-/* harmony import */ var _components_Messages_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Messages.vue */ "./resources/assets/js/components/Messages.vue");
+/* harmony import */ var _components_Messages_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Messages.vue */ "./resources/assets/js/components/Messages.vue");
 
 
 
@@ -45243,7 +45244,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
     accent: vuetify_es5_util_colors__WEBPACK_IMPORTED_MODULE_3___default.a.teal.base
   }
 });
-axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.baseURL = 'http://localhost:8000/api';
+axios__WEBPACK_IMPORTED_MODULE_5___default.a.defaults.baseURL = 'http://localhost:3000/api';
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   routes: [{
     path: '/',
@@ -45298,7 +45299,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   }, {
     path: '/user/messages',
     name: 'Messages',
-    component: _components_Messages_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    component: _components_Messages_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
     meta: {
       auth: true
     }
