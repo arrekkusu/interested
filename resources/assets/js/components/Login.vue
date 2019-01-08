@@ -32,9 +32,9 @@
                     <v-text-field
                     v-model="password"
                     label="Password"
-                    :type="show1 ? 'text' : 'password'"
-                    :append-icon="show1 ? 'visibility_off' : 'visibility'"
-                    @click:append="show1 = !show1"
+                    :type="show ? 'text' : 'password'"
+                    :append-icon="show ? 'visibility_off' : 'visibility'"
+                    @click:append="show = !show"
                 ></v-text-field>
                 <v-btn color="primary" @click="login()">Continue</v-btn>     
                    </v-flex>           
@@ -52,23 +52,28 @@ export default {
         email: null,
         password: null,
         error: false,
-        show1: false,
+        show: false,
       }
     },
     methods: {
       login(){
-        var app = this
-        this.$auth.login({
-            params: {
-              email: app.email,
-              password: app.password
-            }, 
-            success: function () {},
-            error: function () {},
-            rememberMe: true,
-            redirect: '/dashboard',
-            fetchUser: true,
-        });       
+        // var app = this
+        // this.$auth.login({
+        //     params: {
+        //       email: app.email,
+        //       password: app.password
+        //     }, 
+        //     success: function () {},
+        //     error: function () {},
+        //     rememberMe: true,
+        //     redirect: '/dashboard',
+        //     fetchUser: true,
+        // });  
+        this.axios.post('auth/login', this.user)
+        .then((response) => {
+            console.log('success!');
+            this.$router.push('dashboard');
+        })     
       },
     }
 }
