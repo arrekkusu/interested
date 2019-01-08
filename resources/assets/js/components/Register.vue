@@ -15,25 +15,25 @@
                    <v-layout align-center justify-center column wrap>
                        <v-flex xs12>
                             <v-text-field
-                    v-model="username"
+                    v-model="user.username"
                     label="Username"
                     required
                     />
                     <v-text-field
-                    v-model="name"
+                    v-model="user.name"
                     label="Name"
                     id="2"
                     required
                     />
                     <v-text-field
-                    v-model="email"
+                    v-model="user.email"
                     label="E-Mail"
                     required
                     />
                     <v-text-field
-                    v-model="password"
+                    v-model="user.password"
                     label="Password"
-                    :type="show1 ? 'text' : 'password'"
+                    :type="show ? 'text' : 'password'"
                     :append-icon="show ? 'visibility_off' : 'visibility'"
                     @click:append="show = !show"
                 ></v-text-field>
@@ -50,10 +50,12 @@
 export default {
   data(){
             return {
-                username: '',
+                user: {
+                     username: '',
                 name: '',
                 email: '',
                 password: '',
+                },
                 error: false,
                 errors: {},
                 success: false,
@@ -62,23 +64,29 @@ export default {
         },
         methods: {
             register(){
-                var app = this
-                this.$auth.register({
-                    data: {
-                        username: app.username,
-                        name: app.name,
-                        email: app.email,
-                        password: app.password
-                    }, 
-                    success: function () {
-                        app.success = true
-                    },
-                    error: function (resp) {
-                        app.error = true;
-                        app.errors = resp.response.data.errors;
-                    },
-                    redirect: 'dashboard'
-                });                
+                // var app = this
+                // this.$auth.register({
+                //     data: {
+                //         username: app.username,
+                //         name: app.name,
+                //         email: app.email,
+                //         password: app.password
+                //     }, 
+                //     success: function () {
+                //         app.success = true
+                //     },
+                //     error: function (resp) {
+                //         app.error = true;
+                //         app.errors = resp.response.data.errors;
+                //     },
+                //     redirect: 'dashboard'
+                // });   
+                this.axios.post('auth/register', this.user) 
+                .then((response) => {
+                    this.success = true;
+                    console.log(this.success);
+                    this.$router.push('dashboard');
+                });
             }
         }
 }

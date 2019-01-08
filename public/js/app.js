@@ -3798,10 +3798,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      username: '',
-      name: '',
-      email: '',
-      password: '',
+      user: {
+        username: '',
+        name: '',
+        email: '',
+        password: ''
+      },
       error: false,
       errors: {},
       success: false,
@@ -3810,22 +3812,30 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
-      var app = this;
-      this.$auth.register({
-        data: {
-          username: app.username,
-          name: app.name,
-          email: app.email,
-          password: app.password
-        },
-        success: function success() {
-          app.success = true;
-        },
-        error: function error(resp) {
-          app.error = true;
-          app.errors = resp.response.data.errors;
-        },
-        redirect: 'dashboard'
+      var _this = this;
+
+      // var app = this
+      // this.$auth.register({
+      //     data: {
+      //         username: app.username,
+      //         name: app.name,
+      //         email: app.email,
+      //         password: app.password
+      //     }, 
+      //     success: function () {
+      //         app.success = true
+      //     },
+      //     error: function (resp) {
+      //         app.error = true;
+      //         app.errors = resp.response.data.errors;
+      //     },
+      //     redirect: 'dashboard'
+      // });   
+      this.axios.post('auth/register', this.user).then(function (response) {
+        _this.success = true;
+        console.log(_this.success);
+
+        _this.$router.push('dashboard');
       });
     }
   }
@@ -4124,7 +4134,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -7309,40 +7319,40 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "Username", required: "" },
                             model: {
-                              value: _vm.username,
+                              value: _vm.user.username,
                               callback: function($$v) {
-                                _vm.username = $$v
+                                _vm.$set(_vm.user, "username", $$v)
                               },
-                              expression: "username"
+                              expression: "user.username"
                             }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
                             attrs: { label: "Name", id: "2", required: "" },
                             model: {
-                              value: _vm.name,
+                              value: _vm.user.name,
                               callback: function($$v) {
-                                _vm.name = $$v
+                                _vm.$set(_vm.user, "name", $$v)
                               },
-                              expression: "name"
+                              expression: "user.name"
                             }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
                             attrs: { label: "E-Mail", required: "" },
                             model: {
-                              value: _vm.email,
+                              value: _vm.user.email,
                               callback: function($$v) {
-                                _vm.email = $$v
+                                _vm.$set(_vm.user, "email", $$v)
                               },
-                              expression: "email"
+                              expression: "user.email"
                             }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
                             attrs: {
                               label: "Password",
-                              type: _vm.show1 ? "text" : "password",
+                              type: _vm.show ? "text" : "password",
                               "append-icon": _vm.show
                                 ? "visibility_off"
                                 : "visibility"
@@ -7353,11 +7363,11 @@ var render = function() {
                               }
                             },
                             model: {
-                              value: _vm.password,
+                              value: _vm.user.password,
                               callback: function($$v) {
-                                _vm.password = $$v
+                                _vm.$set(_vm.user, "password", $$v)
                               },
-                              expression: "password"
+                              expression: "user.password"
                             }
                           }),
                           _vm._v(" "),
