@@ -22,7 +22,8 @@ class AuthController extends Controller
         return response([
             'status' => 'success',
             'data' => $user
-        ], 200);
+        ], 200)
+        ->header('Authoriztion', $token);
     }
 
     public function login(Request $request)
