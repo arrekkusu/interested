@@ -3648,33 +3648,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      email: null,
-      password: null,
+      user: {
+        email: null,
+        password: null
+      },
       error: false,
       show: false
     };
   },
   methods: {
     login: function login() {
-      var _this = this;
-
-      // var app = this
-      // this.$auth.login({
-      //     params: {
-      //       email: app.email,
-      //       password: app.password
-      //     }, 
-      //     success: function () {},
-      //     error: function () {},
-      //     rememberMe: true,
-      //     redirect: '/dashboard',
-      //     fetchUser: true,
-      // });  
-      this.axios.post('auth/login', this.user).then(function (response) {
-        console.log('success!');
-
-        _this.$router.push('dashboard');
-      });
+      var app = this.user;
+      this.$auth.login({
+        params: {
+          email: app.email,
+          password: app.password
+        },
+        success: function success() {},
+        error: function error() {},
+        rememberMe: true,
+        redirect: '/dashboard',
+        fetchUser: true
+      }); // this.axios.post('auth/login', this.user)
+      // .then((response) => {
+      //     console.log('success!');
+      //     this.$router.push('dashboard');
+      // })     
     }
   }
 });
@@ -4103,7 +4102,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -7068,11 +7067,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "E-mail" },
                             model: {
-                              value: _vm.email,
+                              value: _vm.user.email,
                               callback: function($$v) {
-                                _vm.email = $$v
+                                _vm.$set(_vm.user, "email", $$v)
                               },
-                              expression: "email"
+                              expression: "user.email"
                             }
                           }),
                           _vm._v(" "),
@@ -7094,11 +7093,11 @@ var render = function() {
                               }
                             },
                             model: {
-                              value: _vm.password,
+                              value: _vm.user.password,
                               callback: function($$v) {
-                                _vm.password = $$v
+                                _vm.$set(_vm.user, "password", $$v)
                               },
-                              expression: "password"
+                              expression: "user.password"
                             }
                           }),
                           _vm._v(" "),

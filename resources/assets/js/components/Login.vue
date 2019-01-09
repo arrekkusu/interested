@@ -25,12 +25,12 @@
                    <v-flex xs12>
                          <p class="title">Username</p>
                     <v-text-field
-                    v-model="email"
+                    v-model="user.email"
                     label="E-mail"
                 ></v-text-field>
                 <p class="title pt-3">Password</p>
                     <v-text-field
-                    v-model="password"
+                    v-model="user.password"
                     label="Password"
                     :type="show ? 'text' : 'password'"
                     :append-icon="show ? 'visibility_off' : 'visibility'"
@@ -49,31 +49,33 @@
 export default {
      data(){
       return {
-        email: null,
+       user: {
+            email: null,
         password: null,
+       },
         error: false,
         show: false,
       }
     },
     methods: {
       login(){
-        // var app = this
-        // this.$auth.login({
-        //     params: {
-        //       email: app.email,
-        //       password: app.password
-        //     }, 
-        //     success: function () {},
-        //     error: function () {},
-        //     rememberMe: true,
-        //     redirect: '/dashboard',
-        //     fetchUser: true,
-        // });  
-        this.axios.post('auth/login', this.user)
-        .then((response) => {
-            console.log('success!');
-            this.$router.push('dashboard');
-        })     
+        var app = this.user
+        this.$auth.login({
+            params: {
+              email: app.email,
+              password: app.password
+            }, 
+            success: function () {},
+            error: function () {},
+            rememberMe: true,
+            redirect: '/dashboard',
+            fetchUser: true,
+        });  
+        // this.axios.post('auth/login', this.user)
+        // .then((response) => {
+        //     console.log('success!');
+        //     this.$router.push('dashboard');
+        // })     
       },
     }
 }
