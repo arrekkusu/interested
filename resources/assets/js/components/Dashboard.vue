@@ -30,7 +30,7 @@
            </v-card>
            </v-dialog>
            </v-flex>
-                 <v-btn fab flat v-if="$auth.check()" class="white--text transparent" @click.prevent="$auth.logout()">
+                 <v-btn fab flat class="white--text transparent" @click.prevent="logout()">
                         <v-icon>exit_to_app</v-icon>
                     </v-btn>
         </v-toolbar-items>
@@ -77,7 +77,7 @@
             </v-list-tile-action>
             <v-list-tile-title dark>Profile</v-list-tile-title>
         </v-list-tile>
-         <v-list-tile @click="$auth.logout()">
+         <v-list-tile @click="logout()">
             <v-list-tile-action>
                 <v-icon>exit_app</v-icon>
             </v-list-tile-action>
@@ -167,11 +167,13 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
         data() {
            return {
               sidenav: false,
-              user: [],
+              user: '',
               recommended: [],
               limitationList: 4,
               users: [],
@@ -180,18 +182,28 @@ export default {
            };
         },
         mounted() {
-                this.axios.get('auth/user')
-                .then((response) => {
-                        this.user = response.data.data;
-                         this.axios.get(`${this.user.id}/recommended`)
-                .then((response) => {
-                    this.recommended = response.data.recommended;
-                })
-                });
-                this.axios.get('get/users')
-                .then((response) => {
-                    this.users = response.data.users;
-                });
+                // this.axios.get('auth/user')
+                // .then((response) => {
+                //         this.user = response.data.data;
+                //          this.axios.get(`${this.user.id}/recommended`)
+                // .then((response) => {
+                //     this.recommended = response.data.recommended;
+                // })
+                // });
+                // this.axios.get('get/users')
+                // .then((response) => {
+                //     this.users = response.data.users;
+                // });
+                 this.axios.get('/api/dashboard', {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                this.user = response.data.data
+            }).catch(error => {
+
+            })
         },
         methods: {
             search() {
@@ -199,6 +211,11 @@ export default {
                 .then((response) => {
                     this.success = response.data.success;
                 })
+            },
+            logout() {
+         localStorage.removeItem('token')
+            store.commit('logoutUser')
+            this.$router.push({ name: 'home' })
             }
         }
 }

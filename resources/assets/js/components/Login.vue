@@ -22,22 +22,24 @@
             <v-layout justify-center align-center>
                  <v-flex xs10 lg12>
                    <v-layout align-center justify-center column wrap>
+                    <form class="form-signin" v-on:submit.prevent="login">
                    <v-flex xs12>
                          <p class="title">Username</p>
                     <v-text-field
-                    v-model="user.email"
+                    v-model="email"
                     label="E-mail"
                 ></v-text-field>
                 <p class="title pt-3">Password</p>
                     <v-text-field
-                    v-model="user.password"
+                    v-model="password"
                     label="Password"
                     :type="show ? 'text' : 'password'"
                     :append-icon="show ? 'visibility_off' : 'visibility'"
                     @click:append="show = !show"
                 ></v-text-field>
-                <v-btn color="primary" @click="login()">Continue</v-btn>     
+                <v-btn color="primary" type="submit">Continue</v-btn>     
                    </v-flex>           
+                   </form>
                    </v-layout>
                </v-flex>
                </v-layout>
@@ -46,36 +48,32 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
      data(){
       return {
-       user: {
-            email: null,
+        email: null,
         password: null,
-       },
         error: false,
         show: false,
+        loginError: false,
       }
     },
     methods: {
-      login(){
-        var app = this.user
-        this.$auth.login({
-            params: {
-              email: app.email,
-              password: app.password
-            }, 
-            success: function () {},
-            error: function () {},
-            rememberMe: true,
-            redirect: '/dashboard',
-            fetchUser: true,
-        });  
-        // this.axios.post('auth/login', this.user)
-        // .then((response) => {
-        //     console.log('success!');
-        //     this.$router.push('dashboard');
-        // })     
+      login(){  
+          this.loginError = false
+        this.axios.post('api/auth/login', {
+            email: this.email,
+            password: this.password
+        })
+        .then((response) => {
+           store.commit('loginUser')
+                    localStorage.setItem('token', response.data.access_token)
+                    this.$router.push({ name: 'dashboard' })
+                }).catch(error => {
+                    this.loginError = true
+                });
       },
     }
 }

@@ -11,13 +11,13 @@
                      <v-btn class="transparent" flat>
                         <router-link class="white--text" :to="{ name: 'home' }">Home</router-link>
                     </v-btn>
-                    <v-btn flat v-if="!$auth.check()" class="pull-right transparent">
+                    <v-btn flat class="pull-right transparent">
                         <router-link class="white--text" :to="{ name: 'login' }">Login</router-link>
                     </v-btn>
-                    <v-btn flat v-if="!$auth.check()" class="pull-right transparent">
+                    <v-btn flat class="pull-right transparent">
                         <router-link class="white--text" :to="{ name: 'register' }">Register</router-link>
                     </v-btn>
-                    <v-btn flat v-if="$auth.check()" class="white--text transparent" @click.prevent="$auth.logout()">
+                    <v-btn flat class="white--text transparent" @click.prevent="$auth.logout()">
                         Logout
                     </v-btn>
                </v-toolbar-items>
